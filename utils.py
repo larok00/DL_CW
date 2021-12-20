@@ -11,17 +11,17 @@ def plot_triplet(generator):
     a = next(iter(generator))
     index = np.random.randint(0, a[0]['a'].shape[0])
     plt.subplot(131)
-    plt.imshow(a[0]['a'][index,:,:,0], cmap='gray') 
+    plt.imshow(a[0]['a'][index,:,:,0], cmap='gray')
     plt.gca().set_xticks([])
     plt.gca().set_yticks([])
     plt.title('Anchor', fontsize=20)
     plt.subplot(132)
-    plt.imshow(a[0]['p'][index,:,:,0], cmap='gray') 
+    plt.imshow(a[0]['p'][index,:,:,0], cmap='gray')
     plt.title('Positive', fontsize=20)
     plt.gca().set_xticks([])
     plt.gca().set_yticks([])
     plt.subplot(133)
-    plt.imshow(a[0]['n'][index,:,:,0], cmap='gray') 
+    plt.imshow(a[0]['n'][index,:,:,0], cmap='gray')
     plt.title('Negative', fontsize=20)
     plt.gca().set_xticks([])
     plt.gca().set_yticks([])
@@ -38,12 +38,12 @@ def plot_denoise(denoise_model):
     index = np.random.randint(0, imgs.shape[0])
     imgs_den = denoise_model.predict(imgs)
     plt.subplot(131)
-    plt.imshow(imgs[index,:,:,0], cmap='gray') 
+    plt.imshow(imgs[index,:,:,0], cmap='gray')
     plt.title('Noisy', fontsize=20)
     plt.gca().set_xticks([])
     plt.gca().set_yticks([])
     plt.subplot(132)
-    plt.imshow(imgs_den[index,:,:,0], cmap='gray') 
+    plt.imshow(imgs_den[index,:,:,0], cmap='gray')
     plt.title('Denoised', fontsize=20)
     plt.gca().set_xticks([])
     plt.gca().set_yticks([])
@@ -64,7 +64,7 @@ def generate_desc_csv(descriptor_model, seqs_test, denoise_model=None, use_clean
     """
     w = 32
     bs = 128
-    output_dir = './out'
+    output_dir = '.\\out'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     if use_clean:
@@ -88,7 +88,7 @@ def generate_desc_csv(descriptor_model, seqs_test, denoise_model=None, use_clean
                 patches_for_net[i, :, :, 0] = cv2.resize(patch[0:w, 0:w], (32,32))
             ###
             outs = []
-            
+
             n_batches = int(n_patches / bs) + 1
             for batch_idx in range(n_batches):
                 st = batch_idx * bs

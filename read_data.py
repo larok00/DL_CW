@@ -1,4 +1,4 @@
-## Modification from original HardNet implementation in 
+## Modification from original HardNet implementation in
 ## https://raw.githubusercontent.com/DagnyT/hardnet/master/code/dataloaders/HPatchesDatasetCreator.py
 ## I need to clean it a little bit and modify some things, but it works
 
@@ -64,11 +64,11 @@ class DenoiseHPatches(keras.utils.Sequence):
         img_noise = np.empty((self.batch_size,) + self.dim + (self.n_channels,))
 
         for i in range(self.batch_size):
-            img, img_n = self.get_images(index*self.batch_size+i)    
+            img, img_n = self.get_images(index*self.batch_size+i)
             img_clean[i] = np.expand_dims(img, -1)
             img_noise[i] = np.expand_dims(img_n, -1)
 
-        return img_noise, img_clean    
+        return img_noise, img_clean
 
     def on_epoch_end(self):
         # 'Updates indexes after each epoch'
@@ -78,7 +78,7 @@ class hpatches_sequence_folder:
     """Class for loading an HPatches sequence from a sequence folder"""
     itr = tps
     def __init__(self, base, noise=1):
-        name = base.split('/')
+        name = base.split('\\')
         self.name = name[-1]
         self.base = base
         if noise:
@@ -107,7 +107,7 @@ def generate_triplets(labels, num_triplets, batch_size):
     n_classes = unique_labels.shape[0]
     # add only unique indices in batch
     already_idxs = set()
-    
+
     for x in tqdm(range(num_triplets)):
         if len(already_idxs) >= batch_size:
             already_idxs = set()
@@ -240,7 +240,7 @@ class DataGeneratorDesc(keras.utils.Sequence):
     def __len__(self):
         '''Denotes the number of batches per epoch'''
         return int(np.floor(len(self.triplets) / self.batch_size))
-                
+
     def __getitem__(self, index):
         y = np.zeros((self.batch_size, 1))
         img_a = np.empty((self.batch_size,) + self.dim + (self.n_channels,))
@@ -248,7 +248,7 @@ class DataGeneratorDesc(keras.utils.Sequence):
         if self.out_triplets:
             img_n = np.empty((self.batch_size,) + self.dim + (self.n_channels,))
         for i in range(self.batch_size):
-            t = self.triplets[self.batch_size*index + i]    
+            t = self.triplets[self.batch_size*index + i]
             img_a_t, img_p_t, img_n_t = self.get_image(t)
             img_a[i] = img_a_t
             img_p[i] = img_p_t
@@ -261,5 +261,5 @@ class DataGeneratorDesc(keras.utils.Sequence):
         # 'Updates indexes after each epoch'
         self.triplets = generate_triplets(self.labels, self.num_triplets, 32)
 
-    
-    
+
+

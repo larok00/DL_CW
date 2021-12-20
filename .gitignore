@@ -1,3 +1,5 @@
+hpatches/
 out/
-results/
+results*/
+.ipynb_checkpoints/
 *.pyc
