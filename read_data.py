@@ -78,7 +78,7 @@ class hpatches_sequence_folder:
     """Class for loading an HPatches sequence from a sequence folder"""
     itr = tps
     def __init__(self, base, noise=1):
-        name = base.split('\\')
+        name = base.split('/')
         self.name = name[-1]
         self.base = base
         if noise:
@@ -260,6 +260,3 @@ class DataGeneratorDesc(keras.utils.Sequence):
     def on_epoch_end(self):
         # 'Updates indexes after each epoch'
         self.triplets = generate_triplets(self.labels, self.num_triplets, 32)
-
-
-
